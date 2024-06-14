@@ -1,0 +1,25 @@
+name: Lint Docs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v3
+
+    - name: Install dependencies
+      run: |
+        npm install -g markdownlint-cli
+        npm install -g write-good
+        # npm install -g spellchecker-cli
+
+    - name: Run custom lint script
+      run: ./scripts/lint
